@@ -1,6 +1,3 @@
-import { useState } from "react";
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
 import Form from "../../components/form";
 
 export default function Register() {
@@ -34,7 +31,7 @@ export default function Register() {
     return (
         <div>
             <h1>Register</h1>
-            <Form fields={fields} button="Register" request="tryRegister" redirect="/login"/>
+            <Form fields={fields} button="Register" request="TryRegister" redirect="/login"/>
         </div>
     )
 }

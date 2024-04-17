@@ -19,7 +19,7 @@ export default function Login() {
     return (
         <div>
             <h1>Login</h1>
-            <Form fields={fields} button="Login" request="tryLogin" redirect="/home"/>
+            <Form fields={fields} button="Login" request="TryLogin" redirect="/home"/>
         </div>
     )
 }
