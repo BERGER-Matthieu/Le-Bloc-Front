@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const tryRegister = async (data) => {
+const queryParameters = new URLSearchParams(window.location.search)
+
+export const TryRegister = async (data, cookies) => {
     return axios({
         method: 'put',
         url: 'http://localhost:3001/LBB/createUser',
@@ -14,14 +16,36 @@ export const tryRegister = async (data) => {
     })
 }
 
-export const tryLogin = async (data) => {
+export const TryLogin = async (data, cookies) => {
+
     return axios({
         method: 'post',
         url: 'http://localhost:3001/LBB/loginUser',
         data: data,
     })
     .then((res) => {
-        document.cookie = `token=${res.data.token}`;
+        cookies.setCookie('token', res.data);
+        return({status: res.status})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const SendMessage = async (data, cookies) => {
+    return axios({
+        method: 'post',
+        url: 'http://localhost:3001/LBB/sendMessage',
+        headers: {
+            'Authorization': `Bearer ${cookies.cookies.token}`
+        },
+        data: {
+            senderToken: cookies.cookies.token,
+            receiverId: queryParameters.get("receiverId"),
+            content: data.message,
+        },
+    })
+    .then((res) => {
         return({status: res.status})
     })
     .catch((res) => {

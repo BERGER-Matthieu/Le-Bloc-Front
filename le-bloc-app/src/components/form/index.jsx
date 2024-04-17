@@ -1,10 +1,12 @@
 import { useState } from "react";
 import * as requests from "../../common/requests";
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 export default function Form(props) {
     const [fieldArray, setFieldArray] = useState(props.fields);
     const navigate = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     return (
         <form>
@@ -36,7 +38,7 @@ export default function Form(props) {
                         reqData[f.key] = f.value;
                     }, {});
 
-                    const res = await requests[props.request](reqData);
+                    const res = await requests[props.request](reqData, {"cookies": cookies,"setCookie": setCookie,"removeCookie": removeCookie});
                     
                     if (res.status === 200) {
                         navigate(props.redirect);

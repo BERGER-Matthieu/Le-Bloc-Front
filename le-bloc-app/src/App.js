@@ -3,7 +3,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Login from './screen/login';
 import Register from './screen/register';
 import Home from './screen/home';
-import Bloc from './screen/blocs';
 
 const router = createBrowserRouter([
   {
@@ -17,10 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element : <Home/>
-  },
-  {
-    path: "/createBloc",
-    element : <Bloc/>
+  
   }
 ]);
 
