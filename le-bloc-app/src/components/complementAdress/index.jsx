@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as request from "../../common/requests";
 
-export default function ComplementAdresse() {
+export default function ComplementAdresse( {gpsCoord} ) {
     const [InputValue, setInputValue] = useState('');
     const [IdValue, setIdValue] = useState('');
     const [Output, setOutput] = useState([]);
@@ -19,13 +19,14 @@ export default function ComplementAdresse() {
 
     const handleSuggestionClick = (suggestion, setInput, setOutput, setId) => {
       try{
+        gpsCoord(suggestion.address.coord.lon + ";" + suggestion.address.coord.lat)
         setId(suggestion.address.coord.lon + ";" + suggestion.address.coord.lat);
         setInput(suggestion.name);
         setOutput([]);
       }
       catch(e)
       {
-        alert("please choose a valid address");
+        alert(e);
       }
       
     };

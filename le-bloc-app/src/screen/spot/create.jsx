@@ -1,7 +1,10 @@
-import Form from '../../components/form';
 import ComplementAdresse from "../../components/complementAdress";
+import Form from '../../components/form';
+import { useState } from "react";
 
 export default function CreateSpot() {
+    const [gpsCoord, setGpsCoord]   = useState('');
+
     const fields = [
         {
             type: "text",
@@ -25,7 +28,8 @@ export default function CreateSpot() {
             key: "description"
         },{
             type: "text",
-            value: "",
+            value: gpsCoord,
+            display : "none",
             placeholder: "Coordonnées gps",
             key: "coord"
         },
@@ -40,8 +44,8 @@ export default function CreateSpot() {
     return (
         <div>
             <h1>Create spot</h1>
-            <ComplementAdresse/>
-            <Form fields={fields} button="Create" request="TryCreateSpot"/>
+            <ComplementAdresse gpsCoord={setGpsCoord} />
+            <Form fields={fields} button="Create" request="TryCreateSpot" isCoord="True"/>
         </div>
     )
 }

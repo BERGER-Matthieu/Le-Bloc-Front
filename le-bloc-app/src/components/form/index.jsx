@@ -16,6 +16,7 @@ export default function Form(props) {
                     type={f.type}
                     value={fieldArray[i].value}
                     placeholder={f.placeholder}
+                    style={{display: f.display ? f.display : ""}}
                     onChange={
                         (e) => {
                             const newValue = e.target.value;
