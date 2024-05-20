@@ -67,3 +67,17 @@ export const GetUserById = async (data, cookies, socket) => {
         return({status: res.response.status, data: res.response.data})
     })
 }
+
+export const TryCreateSpot = async (data, cookies, socket) => {
+    return axios({
+        method: 'put',
+        url: 'http://localhost:3001/LBB/createSpot',
+        data: data,
+    })
+    .then((res) => {
+        return({status: res.status})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}

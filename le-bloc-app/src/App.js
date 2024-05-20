@@ -4,6 +4,7 @@ import Login from './screen/login';
 import Register from './screen/register';
 import Home from './screen/home';
 import Chat from './screen/chat';
+import CreateSpot from './screen/spot/createSpot';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element : <Chat/>
+  },
+  {
+    path: "/create-spot",
+    element : <CreateSpot/>
   }
 ]);
 
