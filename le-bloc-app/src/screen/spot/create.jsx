@@ -1,4 +1,5 @@
 import Form from '../../components/form';
+import ComplementAdresse from "../../components/complementAdress";
 
 export default function CreateSpot() {
     const fields = [
@@ -39,6 +40,7 @@ export default function CreateSpot() {
     return (
         <div>
             <h1>Create spot</h1>
+            <ComplementAdresse/>
             <Form fields={fields} button="Create" request="TryCreateSpot"/>
         </div>
     )

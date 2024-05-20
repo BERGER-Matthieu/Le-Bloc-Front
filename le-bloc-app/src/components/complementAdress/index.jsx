@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as request from "../../common/requests";
 
-export default function complementAdresse() {
+export default function ComplementAdresse() {
     const [InputValue, setInputValue] = useState('');
     const [IdValue, setIdValue] = useState('');
     const [Output, setOutput] = useState([]);
