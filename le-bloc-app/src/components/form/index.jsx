@@ -38,7 +38,7 @@ export default function Form(props) {
                         reqData[f.key] = f.value;
                     }, {});
 
-                    const res = await requests[props.request](reqData, {"cookies": cookies,"setCookie": setCookie,"removeCookie": removeCookie});
+                    const res = await requests[props.request](reqData, {"cookies": cookies,"setCookie": setCookie,"removeCookie": removeCookie}, (props.socket === undefined ? null : props.socket));
                     
                     if (res.status === 200) {
                         navigate(props.redirect);

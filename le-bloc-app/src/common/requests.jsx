@@ -2,7 +2,7 @@ import axios from "axios";
 
 const queryParameters = new URLSearchParams(window.location.search)
 
-export const TryRegister = async (data, cookies) => {
+export const TryRegister = async (data, cookies, socket) => {
     return axios({
         method: 'put',
         url: 'http://localhost:3001/LBB/createUser',
@@ -16,7 +16,7 @@ export const TryRegister = async (data, cookies) => {
     })
 }
 
-export const TryLogin = async (data, cookies) => {
+export const TryLogin = async (data, cookies, socket) => {
 
     return axios({
         method: 'post',
@@ -32,21 +32,36 @@ export const TryLogin = async (data, cookies) => {
     })
 }
 
-export const SendMessage = async (data, cookies) => {
+export const SendMessage = async (data, cookies, socket) => {
+    const messageContent = {
+        senderToken: cookies.cookies.token,
+        receiverId: queryParameters.get("receiverId"),
+        content: data.message,
+    }
     return axios({
         method: 'post',
         url: 'http://localhost:3001/LBB/sendMessage',
-        headers: {
-            'Authorization': `Bearer ${cookies.cookies.token}`
-        },
+        data: messageContent,
+    })
+    .then((res) => {
+        socket.emit('message', messageContent);
+        return({status: res.status})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const GetUserById = async (data, cookies, socket) => {
+    return axios({
+        method: 'post',
+        url: 'http://localhost:3001/LBB/getUserById',
         data: {
-            senderToken: cookies.cookies.token,
-            receiverId: queryParameters.get("receiverId"),
-            content: data.message,
+            _id: data.id,
         },
     })
     .then((res) => {
-        return({status: res.status})
+        return({status: res.status, data: res.data})
     })
     .catch((res) => {
         return({status: res.response.status, data: res.response.data})
