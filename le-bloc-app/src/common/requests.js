@@ -68,6 +68,19 @@ export const GetUserById = async (data, cookies, socket) => {
     })
 }
 
+export const GetSpotById = async (data, cookies, socket) => {
+    return axios({
+        method: 'get',
+        url: `http://localhost:3001/LBB/getSpotDataById/${data.id}`,
+    })
+    .then((res) => {
+        return({status: res.status, data: res.data})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
 export const TryCreateSpot = async (data, cookies, socket) => {
     return axios({
         method: 'put',
