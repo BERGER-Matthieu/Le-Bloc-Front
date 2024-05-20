@@ -17,6 +17,14 @@ const router = createBrowserRouter([
     path: "/home",
     element : <Home/>
   
+  },
+  {
+    path: "/chat",
+    element : <Chat/>
+  },
+  {
+    path: "/createBloc",
+    element : <Bloc/>
   }
 ]);
 

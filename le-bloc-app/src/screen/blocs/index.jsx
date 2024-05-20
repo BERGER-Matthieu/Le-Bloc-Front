@@ -33,7 +33,7 @@ export default function Bloc() {
             key: "url"
         },
         {
-            type: "text",
+            type: "file",
             value: "",
             placeholder: "img",
             key: "img"
@@ -53,3 +53,4 @@ export default function Bloc() {
         </div>
     )
 }
+
