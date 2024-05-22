@@ -166,3 +166,21 @@ export const TryCreateBloc = async (data, cookies, socket) => {
         return({status: res.response.status, data: res.response.data})
     })
 }
+
+
+export const TryInputAddress = (query) => {
+    return axios
+      .get('http://localhost:3001/LBB/getAddress', {
+        params: { q: query },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.data; 
+        } else {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+      })
+      .catch((error) => {
+        throw new Error(`Error during API call: ${error.message}`);
+      });
+  };
