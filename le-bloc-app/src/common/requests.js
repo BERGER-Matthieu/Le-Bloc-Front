@@ -98,7 +98,20 @@ export const GetSpotImgById = async (data, cookies, socket) => {
 export const GetBlocsBySpot = async (data, cookies, socket) => {
     return axios({
         method: 'get',
-        url: `http://localhost:3001/LBB/getBlocsBySpot/${data.name}`,
+        url: `http://localhost:3001/LBB/getBlocsBySpot/${data}`,
+    })
+    .then((res) => {
+        return({status: res.status, data: res.data})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const GetBlocsByUser = async (data, cookies, socket) => {
+    return axios({
+        method: 'get',
+        url: `http://localhost:3001/LBB/getBlocsByUser/${data}`,
     })
     .then((res) => {
         return({status: res.status, data: res.data})
@@ -125,7 +138,7 @@ export const GetAllSpot = async (data, cookies, socket) => {
 export const GetUserByToken = async (data, cookies, socket) => {
     return axios({
         method: 'get',
-        url: `http://localhost:3001/LBB/getUserByToken/${data.token}`,
+        url: `http://localhost:3001/LBB/getUserByToken/${data}`,
     })
     .then((res) => {
         return({status: res.status, data: res.data})
@@ -170,17 +183,41 @@ export const TryCreateBloc = async (data, cookies, socket) => {
 
 export const TryInputAddress = (query) => {
     return axios
-      .get('http://localhost:3001/LBB/getAddress', {
+    .get('http://localhost:3001/LBB/getAddress', {
         params: { q: query },
-      })
-      .then((response) => {
+    })
+    .then((response) => {
         if (response.status === 200) {
-          return response.data; 
+            return response.data; 
         } else {
-          throw new Error(`Request failed with status ${response.status}`);
+            throw new Error(`Request failed with status ${response.status}`);
         }
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         throw new Error(`Error during API call: ${error.message}`);
-      });
-  };
+    });
+};
+
+export const GetSpotsByRegion = async (region) => {
+    const url = region ? `http://localhost:3001/LBB/getSpotsByRegion/${queryParameters.get('region')}` : `http://localhost:3001/LBB/getAllSpot`
+    return axios.get(url)
+    .then((res) => {
+        return res.data
+    })
+    .catch((e) => {
+        console.log(e)
+    })
+}
+
+export const GetSpotsByUserId = async (userId) => {
+    console.log(userId)
+    return axios.get(`http://localhost:3001/LBB/getSpotDataByUserId/${userId}`)
+    .then((res) => {
+        console.log(res.data)
+        return res.data
+    })
+    .catch((e) => {
+        console.log(e)
+    })
+
+}

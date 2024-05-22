@@ -43,7 +43,7 @@ export default function CreateBloc() {
 
     return (
         <div>
-            <h1>Create spot</h1>
+            <h1>Create bloc</h1>
             <Form fields={fields} button="Create" request="TryCreateBloc"/>
         </div>
     )

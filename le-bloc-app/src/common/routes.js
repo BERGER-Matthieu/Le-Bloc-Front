@@ -8,6 +8,7 @@ import CreateSpot from '../screen/spot/create';
 import ListSpot from '../screen/spot/list';
 import PageSpot from '../screen/spot/page';
 import CreateBloc from '../screen/bloc/create';
+import Profile from '../screen/profile';
 
 export const routes = [
     {
@@ -34,5 +35,8 @@ export const routes = [
     },{
         path: "/create-bloc",
         element : <ProtectedRoute><CreateBloc/></ProtectedRoute>
+    },{
+        path: "/profile",
+        element : <ProtectedRoute><Profile/></ProtectedRoute> 
     }
 ]
