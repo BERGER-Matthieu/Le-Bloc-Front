@@ -24,8 +24,9 @@ export const TryLogin = async (data, cookies, socket) => {
         data: data,
     })
     .then((res) => {
+        console.log(cookies)
         cookies.setCookie('token', res.data);
-        return({status: res.status})
+        return({status: res.status, data: res.data})
     })
     .catch((res) => {
         return({status: res.response.status, data: res.response.data})
@@ -81,11 +82,82 @@ export const GetSpotById = async (data, cookies, socket) => {
     })
 }
 
+export const GetSpotImgById = async (data, cookies, socket) => {
+    return axios({
+        method: 'get',
+        url: `http://localhost:3001/LBB/getBlocImgById/${data.id}`,
+    })
+    .then((res) => {
+        return({status: res.status, data: res.data})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const GetBlocsBySpot = async (data, cookies, socket) => {
+    return axios({
+        method: 'get',
+        url: `http://localhost:3001/LBB/getBlocsBySpot/${data.name}`,
+    })
+    .then((res) => {
+        return({status: res.status, data: res.data})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const GetAllSpot = async (data, cookies, socket) => {
+    return axios({
+        method: 'get',
+        url: `http://localhost:3001/LBB/getAllSpot`,
+    })
+    .then((res) => {
+        return({status: res.status, data: res.data})
+    })
+    .catch((res) => {
+        console.log(res)
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const GetUserByToken = async (data, cookies, socket) => {
+    return axios({
+        method: 'get',
+        url: `http://localhost:3001/LBB/getUserByToken/${data.token}`,
+    })
+    .then((res) => {
+        return({status: res.status, data: res.data})
+    })
+    .catch((res) => {
+        console.log(res)
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
 export const TryCreateSpot = async (data, cookies, socket) => {
     return axios({
         method: 'put',
         url: 'http://localhost:3001/LBB/createSpot',
-        data: data,
+        data: {...data, token: cookies.cookies.token},
+    })
+    .then((res) => {
+        return({status: res.status})
+    })
+    .catch((res) => {
+        return({status: res.response.status, data: res.response.data})
+    })
+}
+
+export const TryCreateBloc = async (data, cookies, socket) => {
+    return axios({
+        method: 'put',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        url: 'http://localhost:3001/LBB/createBloc',
+        data: {...data, token: cookies.cookies.token},
     })
     .then((res) => {
         return({status: res.status})
